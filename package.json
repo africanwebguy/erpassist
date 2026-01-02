@@ -1,0 +1,7 @@
+{
+  "name": "erpassist",
+  "version": "0.0.1",
+  "description": "AI-powered assistant for ERPNext",
+  "scripts": {},
+  "dependencies": {}
+}
