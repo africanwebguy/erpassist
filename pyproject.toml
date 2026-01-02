@@ -1,0 +1,22 @@
+[build-system]
+requires = ["flit_core >=3.4,<4"]
+build-backend = "flit_core.buildapi"
+
+[project]
+name = "erpassist"
+authors = [
+    {name = "Your Company", email = "support@yourcompany.com"}
+]
+dynamic = ["version", "description"]
+readme = "README.md"
+requires-python = ">=3.8"
+dependencies = [
+    "frappe",
+    "openai>=1.0.0"
+]
+
+[project.urls]
+Home = "https://github.com/yourcompany/erpassist"
+
+[tool.bench.app]
+name = "erpassist"
