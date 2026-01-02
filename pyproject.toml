@@ -1,22 +1,29 @@
 [build-system]
-requires = ["flit_core >=3.4,<4"]
-build-backend = "flit_core.buildapi"
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
 
 [project]
 name = "erpassist"
+version = "0.0.1"
+description = "AI-powered assistant for ERPNext"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "MIT"}
 authors = [
     {name = "Your Company", email = "support@yourcompany.com"}
 ]
-dynamic = ["version", "description"]
-readme = "README.md"
-requires-python = ">=3.8"
 dependencies = [
     "frappe",
     "openai>=1.0.0"
 ]
 
 [project.urls]
-Home = "https://github.com/yourcompany/erpassist"
+Homepage = "https://github.com/africanwebguy/erpassist"
+Documentation = "https://github.com/africanwebguy/erpassist"
+Repository = "https://github.com/africanwebguy/erpassist"
 
-[tool.bench.app]
-name = "erpassist"
+[tool.setuptools]
+packages = ["erpassist"]
+
+[tool.setuptools.package-data]
+erpassist = ["**/*.json", "**/*.js", "**/*.css", "**/*.html", "**/*.py", "**/*.md", "**/*.txt"]
