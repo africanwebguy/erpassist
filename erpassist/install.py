@@ -8,22 +8,39 @@ def after_install():
 	"""
 	Setup ERPAssist after installation
 	"""
-	# Create default settings
-	create_default_settings()
-	
-	# Register default actions
-	ActionRegistry.register_default_actions()
-	
-	frappe.db.commit()
-	
-	print("ERPAssist installation complete!")
-	print("Please configure your OpenAI API key in ERPAssist Settings.")
+	try:
+		# Create default settings only if it doesn't exist
+		create_default_settings()
+		
+		# Register default actions
+		ActionRegistry.register_default_actions()
+		
+		frappe.db.commit()
+		
+		print("=" * 60)
+		print("ERPAssist installation complete!")
+		print("=" * 60)
+		print("Next steps:")
+		print("1. Go to ERPAssist Settings")
+		print("2. Enter your OpenAI API key")
+		print("3. Save and refresh your browser")
+		print("4. Click the chat icon to start!")
+		print("=" * 60)
+		
+	except Exception as e:
+		print(f"Installation completed with warning: {str(e)}")
+		print("You can configure ERPAssist Settings manually.")
 
 def create_default_settings():
 	"""
 	Create default ERPAssist Settings
 	"""
-	if not frappe.db.exists("ERPAssist Settings"):
+	# Check if settings already exist
+	if frappe.db.exists("ERPAssist Settings", "ERPAssist Settings"):
+		print("ERPAssist Settings already exists, skipping creation.")
+		return
+	
+	try:
 		settings = frappe.get_doc({
 			"doctype": "ERPAssist Settings",
 			"ai_model": "gpt-4o",
@@ -38,5 +55,10 @@ def create_default_settings():
 				"enabled": 1
 			})
 		
-		settings.insert()
+		settings.insert(ignore_permissions=True, ignore_if_duplicate=True)
 		frappe.db.commit()
+		print("Created default ERPAssist Settings")
+		
+	except Exception as e:
+		print(f"Could not create default settings: {str(e)}")
+		print("Please create ERPAssist Settings manually after installation.")

@@ -13,7 +13,6 @@ authors = [
     {name = "Your Company", email = "support@yourcompany.com"}
 ]
 dependencies = [
-    "frappe",
     "openai>=1.0.0"
 ]
 
