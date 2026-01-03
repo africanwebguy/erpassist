@@ -288,8 +288,16 @@ erpassist.ChatPanel = class ChatPanel {
 };
 
 // Initialize on page load
-frappe.ready(() => {
-	if (frappe.session.user !== 'Guest') {
+$(document).ready(function() {
+	// Wait for Frappe to be ready
+	if (typeof frappe !== 'undefined' && frappe.session && frappe.session.user !== 'Guest') {
 		window.erpassist_chat = new erpassist.ChatPanel();
+	} else {
+		// Retry after a short delay if Frappe isn't ready yet
+		setTimeout(function() {
+			if (typeof frappe !== 'undefined' && frappe.session && frappe.session.user !== 'Guest') {
+				window.erpassist_chat = new erpassist.ChatPanel();
+			}
+		}, 1000);
 	}
 });
